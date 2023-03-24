@@ -7,16 +7,6 @@ let score = 0;
 let problemSet = generateProblemSet(numberOfProblemsInSet);
 let currentProblemIndex = 1;
 
-//get elements by querySelector from the DOM
-const problemSection = document.getElementById('problem');
-const currentProblemCounter = document.querySelector('.CurrentProblem');
-const currentScore = document.querySelector('.currentScore');
-const answersList = document.querySelectorAll('.li');
-const startOverButton = document.querySelector('.btnStartOver');
-const summaryScreen = document.querySelectorAll('.show-hide');
-const mainElement = document.querySelector('.main');
-
-
 //add an event listener to update the score if the answer is correct
 
 answersList.foreach((answer, index) => {
@@ -116,8 +106,27 @@ function createCorrectAnswer(firstNumber, secondNumber){
   }
 
 
+//get elements by querySelector from the DOM
+const problemSection = document.getElementById('problem');
+const currentProblemCounter = document.querySelector('.CurrentProblem');
+const currentScore = document.querySelector('.currentScore');
+const answersList = document.querySelectorAll('.li');
+const startOverButton = document.querySelector('.btnStartOver');
+const summaryScreen = document.querySelectorAll('.show-hide');
+const mainElement = document.querySelector('.main');
+const expresssion = document.querySelector('expression show-hide');
+
+function createDisplay(problem){
+    currentScore.innerText = currentScore;
+    expresssion.innerText = `${problem.firstNumber} ' * ' ${problem.secondNumber}`;
+
+
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     //FUNCTION CALLS
+    const problem = generateProblem();
+    createDisplay(problem);
 
 
 
