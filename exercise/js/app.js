@@ -1,11 +1,12 @@
 const maxNumberVariableCanBe = 10; //is inclusive, so this creates 9 
 const maxNumberAnswerCanBe = maxNumberVariableCanBe * maxNumberVariableCanBe;
-const numberOfProblemsInSet = 10; 
+const numberOfProblemsInSet = 10;
 
 //initialize the score/problemSet/currentProblemIndex/generates 10 problems
 let score = 0;
 let problemSet = generateProblemSet(numberOfProblemsInSet);
-let currentProblemIndex = 1;
+//set index to 0
+let currentProblemIndex = 0;
 
 //get elements by querySelector from the DOM
 const problemSection = document.getElementById('problem');
@@ -14,44 +15,27 @@ const currentScore = document.querySelector('.currentScore');
 const answersList = document.querySelectorAll('.li');
 const startOverButton = document.querySelector('.btnStartOver');
 const summaryScreen = document.querySelectorAll('.show-hide');
+const finalScore = document.querySelector('.finalScore');
 const mainElement = document.querySelector('.main');
-
-
-//add an event listener to update the score if the answer is correct
-
-answersList.foreach((answer, index) => {
-    answer.addEventListener('click', () => {
-        const isCorrect = checkAnswer(problemSet[currentProblemIndex], index)
-        if (isCorrect) {
-            score++;
-            currentScore.textContent = score;
-        }
-        currentProblemIndex++;
-        if (currentProblemIndex < problemSet.Length) {
-            displayProblem[problemSet[currentProblemIndex]]
-        } else {
-            summaryScreen.forEach(problemSet => {
-                //lement.remove('hidden');
-            });
-
-
-        }
-    });
-})
-
 
 
 /**
  * Function to generate all 10 problems
  * @param {numberOfProblemsInSet} numberOfProblemsInSet 
  */
-function generateProblemSet(numberOfProblemsInSet){}
+function generateProblemSet(numberOfProblemsInSet) {
+    const problemSet = [];
+    for (let i = 0; i < numberOfProblemsInSet; i++) {
+        problemSet.push(generateProblem());
+    }
+    return problemSet;
+}
 
 /**
  * 
  * Creates a problem object
  */
-function generateProblem(){
+function generateProblem() {
     const firstNumber = getRandomNumber(maxNumberVariableCanBe);
     const secondNumber = getRandomNumber(maxNumberVariableCanBe);
     const problemSolution = createCorrectAnswer(firstNumber, secondNumber);
@@ -88,31 +72,70 @@ function shuffleArray(arr) {
  * @param {number} firstNumber 
  * @param {number} secondNumber 
  */
-function createCorrectAnswer(firstNumber, secondNumber){
-    return firstNumber * secondNumber;;
+function createCorrectAnswer(firstNumber, secondNumber) {
+    return firstNumber * secondNumber;
 }
 
 /**
  * Utility function that generates 3 answers that are not equal to the correct answer and adds them to the array
  * @param {number} correctAnswer 
  */
-  function createWrongAnswers(correctAnswer){
-      let answerArray = [];
-      let answer;
-      for (let i = 1; i <= 3 ; i++){
-        do{
+function createWrongAnswers(correctAnswer) {
+    let answerArray = [];
+    let answer;
+    for (let i = 1; i <= 3; i++) {
+        do {
             answer = getRandomNumber(maxNumberAnswerCanBe);
-        }while(answer == correctAnswer);
+        } while (answer == correctAnswer || answer.answerArray.includes(answer));
         answerArray.push(answer);
-      }
-      return answerArray;
-  }
+    }
+    return answerArray;
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
     //FUNCTION CALLS
 
 
+    /**
+     * Function to display the problem and answer list for the current problem index
+     * @param {object} problem 
+     */
+    function displayProblem(problem) {
+        problemSection.textContent = `${problem.firstNumber} x ${problem.secondNumber} =`;
+        currentProblemCounter.textContent = `Problem ${currentProblemIndex + 1} of ${numberOfProblemsInSet}`;
+        currentScore.textContent = score;
+        for (let i = 0; i < answersList.length; i++) {
+            answersList[i].textContent = problem.answerArray[i];
+        }
+    }
 
-    //EVENT LISTENERS 
+
+    //EVENT LISTENERS just keeping this cause yah never know lol...
+
+    // answersList.foreach((answer, index) => {
+    //     answer.addEventListener('click', () => {
+    //         const isCorrect = checkAnswer(problemSet[currentProblemIndex], index)
+    //         if (isCorrect) {
+    //             score++;
+    //             currentScore.textContent = score;
+    //         }
+    //         currentProblemIndex++;
+    //         if (currentProblemIndex < problemSet.Length) {
+    //             displayProblem[problemSet[currentProblemIndex]]
+    //         } else {
+    //             summaryScreen.forEach(problemSet => {
+    //                 element.classList.remove('hidden');
+    //             });
+    //             element.classList.add('hidden');
+
+    //         }
+    //     });
+    // })
+
+
+
+
 });
+//display the first problem
+displayProblem(problemSet[currentProblemIndex]);
