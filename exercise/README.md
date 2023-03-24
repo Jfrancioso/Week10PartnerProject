@@ -12,11 +12,11 @@ Before you start, be sure to review the provided HTML and CSS and look at the mo
 
 When the application loads, it gives the student a problem set with ten multiplication problems. They'll see the problem they need to solve, how many problems they've completed, their score, and four possible answers. At any time during the problem set, the student can start over by clicking "Start Over."
 
-![Math Practice: Start](exercise/mockups/start.png)
+![Math Practice: Start](./mockups/start.png)
 
 Once the student finishes all ten questions, they'll see a summary screen. This screen removes the intro text, problem, and answers.
 
-![Math Practice: Finish](exercise/mockups/finish.png)
+![Math Practice: Finish](./mockups/finish.png)
 
 ## Application requirements
 
@@ -100,7 +100,7 @@ If you finish early or want a challenge, this is for you.
 
 LearnIT wants to release a new version of the application that allows students to practice addition, subtraction, multiplication, or division. This means that you'd need to update the application to show a new screen that asks students to pick the math operations they want to work on.
 
-![Extra Challenge](exercise/mockups/challenge.png)
+![Extra Challenge](./mockups/challenge.png)
 
 Each problem set must still consist of ten problems, but now, they'd include one or more operations based on the student's selection.
 
