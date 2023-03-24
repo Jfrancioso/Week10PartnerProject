@@ -24,7 +24,14 @@ const summaryScreen = document.querySelectorAll('.show-hide');
  * Function to generate all 10 problems
  * @param {numberOfProblemsInSet} numberOfProblemsInSet 
  */
-function generateProblemSet(numberOfProblemsInSet){}
+function generateProblemSet(numberOfProblemsInSet){
+    let problemSet = [];
+    for(let i = 0; i < numberOfProblemsInSet; i++){
+        const problem = generateProblem();
+        problemSet.push(problem);
+    }
+    return problemSet;
+}
 
 /**
  * 
