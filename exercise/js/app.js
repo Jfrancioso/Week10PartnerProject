@@ -17,28 +17,6 @@ let score = 0;
 let problemSet = generateProblemSet(10);
 let currentProblemIndex = 0;
 
-//add an event listener to update the score if the answer is correct
-
-answersList.foreach((answer, index) => {
-    answer.addEventListener('click', () => {
-        const isCorrect = checkAnswer(problemSet[currentProblemIndex], index)
-        if (isCorrect) {
-            score++;
-            currentScore.textContent = score;
-        }
-        currentProblemIndex++;
-        if (currentProblemIndex < problemSet.Length) {
-            displayProblem[problemSet[currentProblemIndex]]
-        } else {
-            summaryScreen.forEach(problemSet => {
-                //lement.remove('hidden');
-            });
-
-
-        }
-    });
-})
-
 
 getRandomNumber();
 
@@ -66,4 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //EVENT LISTENERS 
+
+
+    answersList.foreach((answer, index) => {
+        answer.addEventListener('click', () => {
+            const isCorrect = checkAnswer(problemSet[currentProblemIndex], index)
+            if (isCorrect) {
+                score++;
+                currentScore.textContent = score;
+            }
+            currentProblemIndex++;
+            if (currentProblemIndex < problemSet.Length) {
+                displayProblem[problemSet[currentProblemIndex]]
+            } else {
+                summaryScreen.forEach(problemSet => {
+                    element.classList.remove('hidden');
+                });
+                element.classList.add('hidden');
+
+            }
+        });
+    })
+
 });
